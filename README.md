@@ -1,16 +1,119 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# EcoStay 🌿
 
-Currently, two official plugins are available:
+EcoStay is an AI-assisted sustainable travel platform that helps users discover eco-friendly homestays, plan trips, and receive personalized travel recommendations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+* Responsive Landing Page
+* Dark / Light Mode Toggle
+* Reusable UI Component Library
+* Property Search Interface
+* AI Travel Assistant
+* Mobile-Friendly Design
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Component Library
 
-## Expanding the ESLint configuration
+The project includes reusable UI components:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Button
+* Input
+* Modal
+* Toast
+* Loader
+
+All components are located inside:
+
+```plaintext
+src/components/ui/
+```
+
+and exported through:
+
+```plaintext
+src/components/ui/index.js
+```
+
+## Tech Stack
+
+### Frontend
+
+* React.js
+* Tailwind CSS
+* React Router
+
+### State Management
+
+* React Context API
+
+### Development Tools
+
+* Git
+* GitHub
+* Figma
+
+## Project Structure
+
+```plaintext
+src/
+├── components/
+│   ├── ui/
+│   │   ├── Button.jsx
+│   │   ├── Input.jsx
+│   │   ├── Modal.jsx
+│   │   ├── Toast.jsx
+│   │   ├── Loader.jsx
+│   │   └── index.js
+│   ├── Navbar.jsx
+│   ├── Hero.jsx
+│   └── Searchbar.jsx
+│
+├── context/
+│   └── ThemeContext.jsx
+│
+├── pages/
+│   └── ComponentDemo.jsx
+│
+├── App.jsx
+└── main.jsx
+```
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+
+## Future Enhancements
+
+* User Authentication
+* Booking System
+* AI Travel Recommendations
+* Wishlist Functionality
+* Payment Integration
+
+## Author
+
+Sarthak Jaiswal
+B.Tech CSE
+AI-Assisted Full Stack Web Development Internship
+
+
+
+
