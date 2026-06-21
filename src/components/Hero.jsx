@@ -9,8 +9,8 @@ function Hero() {
     >
       <div className="absolute inset-0 bg-black/50"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-8 text-white">
-        <h1 className="text-6xl font-bold mb-6">
+      <div className="relative z-10 max-w-xl mx-auto px-6 text-white">
+        <h1 className="text-4xl md:text-6xl font-bold">
           Travel Green.
           <br />
           Stay Meaningfully.

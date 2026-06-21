@@ -7,12 +7,15 @@ function Navbar() {
         🌿 AI EcoStay
       </h1>
 
-      <div className="flex gap-6">
+      <div className="hidden md:flex gap-6">
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/login">Login</Link>
       </div>
+      <button className="md:hidden text-2xl">
+          ☰
+        </button>
     </nav>
   );
 }
