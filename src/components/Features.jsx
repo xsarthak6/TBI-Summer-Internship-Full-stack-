@@ -23,25 +23,35 @@ function Features() {
   ];
 
   return (
-    <section className="bg-green-950 py-10">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-6 px-8">
-        {features.map((item) => (
-          <div
-            key={item.title}
-            className="bg-green-900 text-white p-6 rounded-2xl"
-          >
-            <div className="text-3xl mb-3">{item.icon}</div>
+    <section className="bg-[#071f13] py-16">
 
-            <h3 className="font-bold text-lg">
-              {item.title}
-            </h3>
+      <div className="max-w-7xl mx-auto px-8">
 
-            <p className="text-sm text-gray-300 mt-2">
-              {item.desc}
-            </p>
-          </div>
-        ))}
+        <div className="grid md:grid-cols-4 gap-6">
+
+          {features.map((item) => (
+            <div
+              key={item.title}
+              className="bg-[#0d2b1b] border border-green-800/30 rounded-3xl p-6 hover:scale-105 transition duration-300"
+            >
+              <div className="w-14 h-14 rounded-full bg-green-700 flex items-center justify-center text-2xl mb-4">
+                {item.icon}
+              </div>
+
+              <h3 className="text-white font-bold text-xl">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-300 mt-3 text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+
+        </div>
+
       </div>
+
     </section>
   );
 }

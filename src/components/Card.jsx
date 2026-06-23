@@ -1,13 +1,28 @@
-function Card({ title, location, price }) {
+function Card({ title, location, price,image}) {
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-xl hover:scale-105 transition">
-      <img
-        src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1000"
-        alt={title}
-        className="w-full h-64 object-cover"
-      />
+    <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 hover:scale-[1.02] transition duration-300">
+
+      <div className="relative">
+
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-56 object-cover transition-transform duration-500
+  hover:scale-110"
+        />
+
+        <div className="absolute top-4 right-4 bg-white rounded-full p-2 shadow">
+          ❤️
+        </div>
+
+        <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-sm font-semibold">
+          ⭐ 4.8
+        </div>
+
+      </div>
 
       <div className="p-6">
+
         <h3 className="text-2xl font-bold">
           {title}
         </h3>
@@ -16,14 +31,20 @@ function Card({ title, location, price }) {
           📍 {location}
         </p>
 
-        <p className="text-green-700 font-bold mt-3">
+        <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm mt-3">
+          🌿 Eco Certified
+        </span>
+
+        <p className="text-green-700 font-bold text-xl mt-4">
           ₹{price}/night
         </p>
 
-        <button className="mt-4 bg-green-800 text-white px-5 py-2 rounded-lg">
+        <button className="w-full mt-5 bg-gradient-to-r from-green-700 to-emerald-600 hover:bg-green-900 text-white py-3 rounded-xl">
           View Details
         </button>
+
       </div>
+
     </div>
   );
 }

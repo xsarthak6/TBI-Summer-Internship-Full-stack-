@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="bg-green-950 text-white py-8 mt-10">
+    <footer className="bg-green-950 text-white py-16 mt-10">
       <div className="text-center">
         <h3 className="text-xl font-bold">
           AI EcoStay
