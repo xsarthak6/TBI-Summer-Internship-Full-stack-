@@ -11,6 +11,12 @@ const stays = [
     location: "Rishikesh",
     price: 3200,
   },
+  {
+  id: 3,
+  title: "Coorg Jungle Retreat",
+  location: "Coorg",
+  price: 4500,
+},
 ];
 
 module.exports = stays;

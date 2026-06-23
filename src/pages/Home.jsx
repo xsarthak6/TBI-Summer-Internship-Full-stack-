@@ -9,6 +9,18 @@ import Footer from "../components/Footer";
 import Experiences from "../components/Experiences";
 
 function Home() {
+  const [stays, setStays] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/stays")
+      .then((response) => {
+        setStays(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <>
       <Navbar />
@@ -36,32 +48,15 @@ function Home() {
           </p>
 
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-10">
-            <Card
-              title="Mountain Eco Lodge"
-              location="Manali, Himachal Pradesh"
-              price="2500"
-              image="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
-            />
-
-            <Card
-              title="Forest Retreat"
-              location="Rishikesh, Uttarakhand"
-              price="3200"  
-              image="https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
-            />
-            <Card
-              title="Lake View Cottage"
-              location="Nainital"
-              price="2800"
-              image="https://images.unsplash.com/photo-1510798831971-661eb04b3739"
-            />
-
-            <Card
-              title="Village Homestay"
-              location="Coorg"
-              price="2200"
-              image="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"
-            />
+            {stays.map((stay) => (
+          <Card
+            key={stay.id}
+            title={stay.title}
+            location={stay.location}
+            price={stay.price}
+            image="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+          />
+        ))}
           </div>
         </div>
       </section>
