@@ -98,6 +98,30 @@ Run the development server:
 ```bash
 npm run dev
 ```
+**How to Run Backend Locally**
+1. Navigate to backend folder
+cd backend
+2. Install dependencies
+npm install
+3. Start the server
+node server.js
+
+The backend will run at:
+
+http://localhost:5000
+Available API Endpoints
+Get All Stays
+GET /api/stays
+Get Single Stay
+GET /api/stays/:id
+Create Stay
+POST /api/stays
+Update Stay
+PUT /api/stays/:id
+Delete Stay
+DELETE /api/stays/:id
+Search Stays
+GET /api/stays/search?q=manali
 
 
 ## Future Enhancements
