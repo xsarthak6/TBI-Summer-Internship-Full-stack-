@@ -50,11 +50,11 @@ function Home() {
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-10">
             {stays.map((stay) => (
           <Card
-            key={stay.id}
+            key={stay._id}
             title={stay.title}
             location={stay.location}
             price={stay.price}
-            image="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+            image={stay.image}
           />
         ))}
           </div>

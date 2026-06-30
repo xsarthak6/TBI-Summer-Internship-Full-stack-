@@ -1,74 +1,98 @@
-const stays = require("../data/stays");
+const Stay = require("../models/Stay");
 
-exports.getAllStays = (req, res) => {
-  res.status(200).json(stays);
-};
-
-exports.getStayById = (req, res) => {
-  const stay = stays.find(
-    (s) => s.id === parseInt(req.params.id)
-  );
-
-  if (!stay) {
-    return res.status(404).json({
-      message: "Stay not found",
-    });
+// GET all stays
+exports.getAllStays = async (req, res) => {
+  try {
+    const stays = await Stay.find();
+    res.status(200).json(stays);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-
-  res.status(200).json(stay);
 };
 
-exports.createStay = (req, res) => {
-  const newStay = {
-    id: stays.length + 1,
-    ...req.body,
-  };
+// GET stay by ID
+exports.getStayById = async (req, res) => {
+  try {
+    const stay = await Stay.findById(req.params.id);
 
-  stays.push(newStay);
+    if (!stay) {
+      return res.status(404).json({
+        message: "Stay not found",
+      });
+    }
 
-  res.status(201).json(newStay);
-};
-
-exports.updateStay = (req, res) => {
-  const stay = stays.find(
-    (s) => s.id === parseInt(req.params.id)
-  );
-
-  if (!stay) {
-    return res.status(404).json({
-      message: "Stay not found",
-    });
+    res.status(200).json(stay);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-
-  Object.assign(stay, req.body);
-
-  res.status(200).json(stay);
 };
 
-exports.deleteStay = (req, res) => {
-  const index = stays.findIndex(
-    (s) => s.id === parseInt(req.params.id)
-  );
+// CREATE stay
+exports.createStay = async (req, res) => {
+  try {
+    const stay = new Stay(req.body);
+    const savedStay = await stay.save();
 
-  if (index === -1) {
-    return res.status(404).json({
-      message: "Stay not found",
-    });
+    res.status(201).json(savedStay);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
-
-  stays.splice(index, 1);
-
-  res.status(204).send();
 };
 
-exports.searchStays = (req, res) => {
-  const q = req.query.q?.toLowerCase() || "";
+// UPDATE stay
+exports.updateStay = async (req, res) => {
+  try {
+    const stay = await Stay.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
 
-  const results = stays.filter(
-    (s) =>
-      s.title.toLowerCase().includes(q) ||
-      s.location.toLowerCase().includes(q)
-  );
+    if (!stay) {
+      return res.status(404).json({
+        message: "Stay not found",
+      });
+    }
 
-  res.status(200).json(results);
+    res.status(200).json(stay);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// DELETE stay
+exports.deleteStay = async (req, res) => {
+  try {
+    const stay = await Stay.findByIdAndDelete(req.params.id);
+
+    if (!stay) {
+      return res.status(404).json({
+        message: "Stay not found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Stay deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// SEARCH stays
+exports.searchStays = async (req, res) => {
+  try {
+    const q = req.query.q || "";
+
+    const stays = await Stay.find({
+      $or: [
+        { title: { $regex: q, $options: "i" } },
+        { location: { $regex: q, $options: "i" } },
+      ],
+    });
+
+    res.status(200).json(stays);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
