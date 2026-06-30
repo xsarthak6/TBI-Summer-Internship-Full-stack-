@@ -123,6 +123,72 @@ DELETE /api/stays/:id
 Search Stays
 GET /api/stays/search?q=manali
 
+## Database Choice
+
+This project uses MongoDB Atlas as the primary database.
+
+Why MongoDB Atlas?
+Cloud-hosted and easy to configure.
+Integrates seamlessly with Mongoose for Node.js applications.
+Flexible NoSQL document structure suitable for storing stay information.
+Scalable and ideal for full-stack web applications.
+Provides secure remote access and easy database management through MongoDB Atlas.
+
+## Schema Diagram
+Database Schema
+Stay Collection
+Stay
+│
+├── title      : String (Required)
+├── location   : String (Required)
+├── price      : Number (Required)
+└── image      : String (Optional)
+
+![Stay Schema](Downloads/schema.png)
+
+## Set Up the Database
+1. Clone the Repository
+git clone https://github.com/xsarthak6/TBI-Summer-Internsh<img width="1600" height="861" alt="schema" src="https://github.com/user-attachments/assets/3fb95791-25b7-4387-a387-699bc0831aa8" />
+<img width="1600" height="861" alt="schema" src="https://github.com/user-attachments/assets/7ddaf485-8b68-4464-abea-2ec424a13446" />
+ip-Full-stack-.git
+2. Navigate to the Backend
+cd backend
+3. Install Dependencies
+npm install
+4. Create a .env File
+
+Create a .env file inside the backend folder.
+
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/ecostay?retryWrites=true&w=majority
+
+Replace:
+
+<username> with your MongoDB Atlas username.
+<password> with your MongoDB Atlas password.
+<cluster> with your cluster name.
+5. Start the Backend Server
+node server.js
+
+If the connection is successful, you should see:
+
+Server running on port 5000
+MongoDB Connected Successfully
+6. Verify the API
+
+Open:
+
+http://localhost:5000/api/stays
+
+The API should return the stay data stored in MongoDB.
+
+Also ensure your .env.example file contains only placeholder values, for example:
+
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/ecostay?retryWrites=true&w=majority
+
+Do not commit your real MongoDB password or connection string to GitHub.
+
 
 ## Future Enhancements
 
