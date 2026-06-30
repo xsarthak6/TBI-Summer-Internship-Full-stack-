@@ -144,13 +144,12 @@ Stay
 ├── price      : Number (Required)
 └── image      : String (Optional)
 
-![Stay Schema](Downloads/schema.png)
+<img width="569" height="778" alt="W5_SchemaDiagram_ TBI-26100815" src="https://github.com/user-attachments/assets/f40db100-58cd-42dd-813a-9de3b77490ee" />
+
 
 ## Set Up the Database
 1. Clone the Repository
 git clone https://github.com/xsarthak6/TBI-Summer-Internsh<img width="1600" height="861" alt="schema" src="https://github.com/user-attachments/assets/3fb95791-25b7-4387-a387-699bc0831aa8" />
-<img width="1600" height="861" alt="schema" src="https://github.com/user-attachments/assets/7ddaf485-8b68-4464-abea-2ec424a13446" />
-ip-Full-stack-.git
 2. Navigate to the Backend
 cd backend
 3. Install Dependencies
