@@ -1,4 +1,5 @@
-function Card({ title, location, price,image}) {
+import { Link } from "react-router-dom";
+function Card({ _id, title, location, price, image, onDelete }) {
   return (
     <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 hover:scale-[1.02] transition duration-300">
 
@@ -39,9 +40,23 @@ function Card({ title, location, price,image}) {
           ₹{price}/night
         </p>
 
-        <button className="w-full mt-5 bg-gradient-to-r from-green-700 to-emerald-600 hover:bg-green-900 text-white py-3 rounded-xl">
-          View Details
+        <div className="flex gap-3 mt-5">
+
+        <Link
+          to={`/edit-stay/${_id}`}
+          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-xl"
+        >
+          Edit
+        </Link>
+
+        <button
+          onClick={() => onDelete(_id)}
+          className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl"
+        >
+          Delete
         </button>
+
+      </div>
 
       </div>
 

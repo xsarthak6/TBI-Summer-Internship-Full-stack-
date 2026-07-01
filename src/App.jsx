@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import ComponentDemo from "./pages/ComponentDemo";
 import Stays from "./pages/Stays";
+import AddStay from "./pages/AddStay";
+import EditStay from "./pages/EditStay";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/component-demo" element={<ComponentDemo />} />
       <Route path="/stays" element={<Stays />} />
+      <Route path="/add-stay" element={<AddStay />} />
+      <Route path="/edit-stay/:id" element={<EditStay />} />
     </Routes>
   );
 }

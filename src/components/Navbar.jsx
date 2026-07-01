@@ -57,10 +57,20 @@ function Navbar() {
 
         </div>
 
-        <button className="hidden md:block bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg">
-          Sign In
-        </button>
+        <div className="hidden md:flex gap-3">
 
+  <NavLink
+    to="/add-stay"
+    className="bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg transition"
+  >
+    + Add Stay
+  </NavLink>
+
+  <button className="bg-white/20 hover:bg-white/30 text-white px-5 py-2 rounded-lg transition">
+    Sign In
+  </button>
+
+</div>
         <button className="md:hidden text-white text-3xl">
           ☰
         </button>

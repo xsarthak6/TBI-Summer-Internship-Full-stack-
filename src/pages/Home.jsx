@@ -21,7 +21,19 @@ function Home() {
         console.log(error);
       });
   }, []);
-  return (
+  const handleDelete = async (id) => {
+  try {
+    await axios.delete(`http://localhost:5000/api/stays/${id}`);
+
+    setStays((prev) => prev.filter((stay) => stay._id !== id));
+
+    alert("Stay deleted successfully!");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+    return (
     <>
       <Navbar />
 
@@ -51,10 +63,12 @@ function Home() {
             {stays.map((stay) => (
           <Card
             key={stay._id}
+            _id={stay._id}
             title={stay.title}
             location={stay.location}
             price={stay.price}
             image={stay.image}
+            onDelete={handleDelete}
           />
         ))}
           </div>
