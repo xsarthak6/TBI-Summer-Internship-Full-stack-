@@ -6,7 +6,7 @@ function Dashboard() {
     <>
       <Navbar />
 
-      <div className="min-h-screen p-10">
+      <div className="min-h-screen pt-32 px-10">
         <h1 className="text-4xl font-bold">
           Dashboard
         </h1>

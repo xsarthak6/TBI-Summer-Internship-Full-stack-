@@ -1,6 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-white/10">
       <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
@@ -66,11 +74,35 @@ function Navbar() {
     + Add Stay
   </NavLink>
 
-  <button className="bg-white/20 hover:bg-white/30 text-white px-5 py-2 rounded-lg transition">
-    Sign In
-  </button>
+  {token ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition"
+            >
+              Logout
+            </button>
+          ) : (
+            
+            
+            <div className="flex gap-3">
+
+  <NavLink to="/register">
+    <button className="bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg">
+      Register
+    </button>
+  </NavLink>
+
+  <NavLink to="/login">
+    <button className="bg-white/20 hover:bg-white/30 text-white px-5 py-2 rounded-lg">
+      Sign In
+    </button>
+  </NavLink>
 
 </div>
+          )}
+
+        </div>
+
         <button className="md:hidden text-white text-3xl">
           ☰
         </button>

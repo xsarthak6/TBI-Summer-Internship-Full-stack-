@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -24,7 +25,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5000/api/auth/register",
         {
           method: "POST",
           headers: {
@@ -37,15 +38,14 @@ function Login() {
       const data = await response.json();
 
       if (data.success) {
-        localStorage.setItem("token", data.token);
-        alert("Login Successful");
-        navigate("/dashboard");
+        alert("Registration Successful");
+        navigate("/login");
       } else {
-        alert(data.message);
+        alert(data.message || "Registration Failed");
       }
     } catch (error) {
       console.error(error);
-      alert("Login Failed");
+      alert("Something went wrong");
     }
   };
 
@@ -61,8 +61,18 @@ function Login() {
         >
 
           <h2 className="text-3xl font-bold text-center mb-6">
-            Login
+            Register
           </h2>
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full border p-3 rounded-lg mb-4"
+            required
+          />
 
           <input
             type="email"
@@ -88,8 +98,18 @@ function Login() {
             type="submit"
             className="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-green-800"
           >
-            Login
+            Register
           </button>
+
+          <p className="text-center mt-5">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-green-700 font-semibold"
+            >
+              Login
+            </Link>
+          </p>
 
         </form>
 
@@ -100,4 +120,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

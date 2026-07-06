@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { protect } = require("../middleware/authMiddleware");
 
 const {
   getAllStays,
@@ -16,10 +17,11 @@ router.get("/search", searchStays);
 
 router.get("/:id", getStayById);
 
-router.post("/", createStay);
+// Protected Routes
+router.post("/", protect, createStay);
 
-router.put("/:id", updateStay);
+router.put("/:id", protect, updateStay);
 
-router.delete("/:id", deleteStay);
+router.delete("/:id", protect, deleteStay);
 
 module.exports = router;

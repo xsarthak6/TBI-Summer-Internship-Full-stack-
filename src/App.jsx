@@ -8,17 +8,34 @@ import ComponentDemo from "./pages/ComponentDemo";
 import Stays from "./pages/Stays";
 import AddStay from "./pages/AddStay";
 import EditStay from "./pages/EditStay";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./pages/Register";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+  path="/dashboard"
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  }
+/>
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/component-demo" element={<ComponentDemo />} />
       <Route path="/stays" element={<Stays />} />
-      <Route path="/add-stay" element={<AddStay />} />
+      <Route
+  path="/add-stay"
+  element={
+    <ProtectedRoute>
+      <AddStay />
+    </ProtectedRoute>
+  }
+/>
       <Route path="/edit-stay/:id" element={<EditStay />} />
     </Routes>
   );
