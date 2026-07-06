@@ -6,7 +6,9 @@ const router = express.Router();
 const {
   register,
   login,
+  loginWithGoogle,
 } = require("../controllers/authController");
+const passport = require("passport");
 
 router.post(
   "/register",
@@ -38,6 +40,21 @@ router.post(
       .withMessage("Password is required"),
   ],
   login
+);
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    session: false,
+    failureRedirect: "/login",
+  }),
+  loginWithGoogle
 );
 
 module.exports = router;

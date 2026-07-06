@@ -49,6 +49,10 @@ function Login() {
     }
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:5000/api/auth/google";
+  };
+
   return (
     <>
       <Navbar />
@@ -89,6 +93,23 @@ function Login() {
             className="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-green-800"
           >
             Login
+          </button>
+
+          <div className="my-5 text-center text-gray-500">
+            OR
+          </div>
+
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full border border-gray-300 py-3 rounded-lg hover:bg-gray-100 flex items-center justify-center gap-3"
+          >
+            <img
+              src="https://developers.google.com/identity/images/g-logo.png"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            Sign in with Google
           </button>
 
         </form>

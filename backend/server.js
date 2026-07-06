@@ -1,6 +1,10 @@
+require("dotenv").config();
+const passport = require("passport");
+const session = require("express-session");
+
+require("./config/passport");
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 console.log(process.env.MONGO_URI);
 const rateLimit = require("express-rate-limit");
 
@@ -15,6 +19,16 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.use(
+  session({
+    secret: "ecostaysecret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100,                 // Maximum 100 requests

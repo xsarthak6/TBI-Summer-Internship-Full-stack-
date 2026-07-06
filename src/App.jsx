@@ -10,6 +10,7 @@ import AddStay from "./pages/AddStay";
 import EditStay from "./pages/EditStay";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
+import LoginSuccess from "./pages/LoginSuccess";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
   }
 />
       <Route path="/login" element={<Login />} />
+      <Route path="/login-success" element={<LoginSuccess />} />
       <Route path="/register" element={<Register />} />
       <Route path="/component-demo" element={<ComponentDemo />} />
       <Route path="/stays" element={<Stays />} />
