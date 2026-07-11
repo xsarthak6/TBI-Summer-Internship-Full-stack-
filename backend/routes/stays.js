@@ -9,11 +9,14 @@ const {
   updateStay,
   deleteStay,
   searchStays,
+  getMyStays,
 } = require("../controllers/staysController");
 
 router.get("/", getAllStays);
 
 router.get("/search", searchStays);
+
+router.get("/my", protect, getMyStays);
 
 router.get("/:id", getStayById);
 
@@ -23,5 +26,6 @@ router.post("/", protect, createStay);
 router.put("/:id", protect, updateStay);
 
 router.delete("/:id", protect, deleteStay);
+
 
 module.exports = router;

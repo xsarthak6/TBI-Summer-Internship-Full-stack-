@@ -4,11 +4,13 @@ function Navbar() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  navigate("/login");
+};
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-white/10">
       <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
@@ -75,13 +77,23 @@ function Navbar() {
   </NavLink>
 
   {token ? (
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition"
-            >
-              Logout
-            </button>
-          ) : (
+
+<div className="flex items-center gap-4">
+
+  <span className="text-white font-medium">
+    👋 Welcome, {user?.name || "Traveler"}
+  </span>
+
+  <button
+    onClick={handleLogout}
+    className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition"
+  >
+    Logout
+  </button>
+
+</div>
+
+) : (
             
             
             <div className="flex gap-3">

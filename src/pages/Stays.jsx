@@ -1,134 +1,112 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Card from "../components/Card";
+
 
 function Stays() {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const token = localStorage.getItem("token");
+  const [stays, setStays] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filters = [
-    "All",
-    "Homestays",
-    "Hotels",
-    "Resorts",
-    "Villas",
-    "Eco Retreats",
-  ];
+  const fetchStays = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/stays");
+      const data = await response.json();
 
-  const stays = [
-    {
-      id: 1,
-      name: "Green Valley Homestay",
-      location: "Meghalaya",
-      price: "₹2200/night",
-      rating: "4.8",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
-    },
-    {
-      id: 2,
-      name: "Forest Retreat",
-      location: "Coorg",
-      price: "₹2800/night",
-      rating: "4.9",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
-    },
-    {
-      id: 3,
-      name: "Eco Lake Resort",
-      location: "Uttarakhand",
-      price: "₹3200/night",
-      rating: "4.7",
-      image: "https://images.unsplash.com/photo-1510798831971-661eb04b3739"
-    },
-  ];
+      setStays(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleDelete = async (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this stay?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/stays/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Stay deleted successfully.");
+
+      fetchStays();
+    } else {
+      alert(data.message);
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  useEffect(() => {
+    fetchStays();
+  }, []);
 
   return (
-  <div className="min-h-screen bg-gray-50">
+    <>
+      <Navbar />
 
-    <nav className="bg-green-950 text-white px-8 py-4 flex justify-between items-center">
+      <div className="min-h-screen bg-gray-100 pt-28 px-8 pb-10">
 
-      <h2 className="text-2xl font-bold">
-        AI EcoStay
-      </h2>
+        <div className="max-w-7xl mx-auto">
 
-      <div className="flex gap-6">
-        <a href="/">Home</a>
-        <a href="/stays">Stays</a>
-        <a href="/planner">Planner</a>
-      </div>
+          <h1 className="text-5xl font-bold">
+            Discover Eco-Friendly Stays
+          </h1>
 
-    </nav>
+          <p className="text-gray-600 mt-3 mb-10">
+            Find sustainable accommodations directly from our database.
+          </p>
 
-    <div className="p-8">
+          {loading ? (
+            <h2 className="text-2xl font-semibold">
+              Loading...
+            </h2>
+          ) : stays.length === 0 ? (
+            <h2 className="text-2xl font-semibold">
+              No stays found.
+            </h2>
+          ) : (
+            <div className="grid md:grid-cols-3 gap-8">
 
-      <h1 className="text-4xl font-bold mb-8">
-        Discover Eco-Friendly Stays
-      </h1>
-      <p className="text-gray-600 mt-2 mb-8">
-      Find sustainable accommodations that support local communities.
-     </p>
+              {stays.map((stay) => (
 
-      <div className="flex flex-wrap gap-3 mb-8">
-
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            onClick={() => setActiveFilter(filter)}
-            className={`px-4 py-2 rounded-full border ${
-              activeFilter === filter
-                ? "bg-green-700 text-white"
-                : "bg-white"
-            }`}
-          >
-            {filter}
-          </button>
-        ))}
-
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-6">
-
-        {stays.map((stay) => (
-          <div
-            key={stay.id}
-            className="bg-white rounded-xl shadow p-4"
-          >
-
-            <img
-                src={stay.image}
-                alt={stay.name}
-                className="h-48 w-full object-cover rounded-lg mb-4"
+                <Card
+                key={stay._id}
+                _id={stay._id}
+                title={stay.title}
+                location={stay.location}
+                price={stay.price}
+                image={stay.image}
+                owner={stay.owner}
+                onDelete={handleDelete}
               />
 
-            <h2 className="text-xl font-semibold">
-              {stay.name}
-            </h2>
+              ))}
 
-            <p className="text-gray-500">
-              📍 {stay.location}
-            </p>
-            <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm mt-2">
-              🌿 Eco Certified
-            </span>
+            </div>
+          )}
 
-            <p className="mt-2">
-              ⭐ {stay.rating}
-            </p>
-
-            <p className="font-bold text-green-700 mt-2">
-              {stay.price}
-            </p>
-
-            <button
-              className="mt-4 w-full bg-green-700 text-white py-2 rounded-lg"
-            >
-              View Details
-            </button>
-
-          </div>
-        ))}
+        </div>
 
       </div>
-      </div>
 
-    </div>
+    </>
   );
 }
 

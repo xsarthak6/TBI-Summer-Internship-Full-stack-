@@ -19,6 +19,8 @@ exports.protect = (req, res, next) => {
   }
 
   try {
+    console.log("Token received:", token);
+console.log("JWT Secret:", process.env.JWT_SECRET);
 
     const decoded = jwt.verify(
       token,

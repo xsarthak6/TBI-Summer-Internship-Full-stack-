@@ -38,6 +38,10 @@ function Login() {
 
       if (data.success) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem(
+  "user",
+  JSON.stringify(data.user)
+);
         alert("Login Successful");
         navigate("/dashboard");
       } else {

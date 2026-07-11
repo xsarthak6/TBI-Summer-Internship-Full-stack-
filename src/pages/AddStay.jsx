@@ -20,19 +20,30 @@ function AddStay() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      await axios.post("http://localhost:5000/api/stays", stay);
+  try {
+    const token = localStorage.getItem("token");
+    
 
-      alert("Stay Added Successfully!");
+    await axios.post(
+      "http://localhost:5000/api/stays",
+      stay,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong");
-    }
-  };
+    alert("Stay Added Successfully!");
+
+    navigate("/stays");
+  } catch (error) {
+    console.log(error);
+    alert("Something went wrong");
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#F8F5EE] flex justify-center items-center py-20">

@@ -50,10 +50,29 @@ router.get(
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", {
-    session: false,
-    failureRedirect: "/login",
-  }),
+  (req, res, next) => {
+    passport.authenticate(
+      "google",
+      { session: false },
+      (err, user) => {
+        if (err) {
+          console.error("Google Auth Error:", err);
+          return res.status(500).json({
+            error: err.message,
+          });
+        }
+
+        if (!user) {
+          return res.status(401).json({
+            error: "Google login failed",
+          });
+        }
+
+        req.user = user;
+        next();
+      }
+    )(req, res, next);
+  },
   loginWithGoogle
 );
 

@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
-function Card({ _id, title, location, price, image, onDelete }) {
+function Card({ _id, title, location, price, image, owner, onDelete })  {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+const isOwner =
+  user &&
+  owner &&
+  owner._id === user.id;
   return (
     <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 hover:scale-[1.02] transition duration-300">
 
@@ -37,26 +43,37 @@ function Card({ _id, title, location, price, image, onDelete }) {
         </span>
 
         <p className="text-green-700 font-bold text-xl mt-4">
-          ₹{price}/night
-        </p>
+  ₹{price}/night
+</p>
 
-        <div className="flex gap-3 mt-5">
+{/* Everyone can view details */}
+<Link
+  to={`/stays/${_id}`}
+  className="block w-full bg-green-700 hover:bg-green-800 text-white text-center py-3 rounded-xl mt-5"
+>
+  View Details
+</Link>
 
-        <Link
-          to={`/edit-stay/${_id}`}
-          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-xl"
-        >
-          Edit
-        </Link>
+{/* Only the owner can edit/delete */}
+{isOwner && (
+  <div className="flex gap-3 mt-4">
 
-        <button
-          onClick={() => onDelete(_id)}
-          className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl"
-        >
-          Delete
-        </button>
+    <Link
+      to={`/edit-stay/${_id}`}
+      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-xl"
+    >
+      Edit
+    </Link>
 
-      </div>
+    <button
+      onClick={() => onDelete(_id)}
+      className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl"
+    >
+      Delete
+    </button>
+
+  </div>
+)}
 
       </div>
 

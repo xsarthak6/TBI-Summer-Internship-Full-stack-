@@ -11,6 +11,7 @@ import EditStay from "./pages/EditStay";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import LoginSuccess from "./pages/LoginSuccess";
+import StayDetails from "./pages/StayDetails";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
       <Route path="/login-success" element={<LoginSuccess />} />
       <Route path="/register" element={<Register />} />
       <Route path="/component-demo" element={<ComponentDemo />} />
+      <Route
+  path="/stays/:id"
+  element={<StayDetails />}
+/>
       <Route path="/stays" element={<Stays />} />
       <Route
   path="/add-stay"

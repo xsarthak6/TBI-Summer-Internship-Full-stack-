@@ -144,8 +144,10 @@ exports.loginWithGoogle = async (req, res) => {
     }
   );
 
-  res.redirect(
-    `http://localhost:5173/login-success?token=${token}`
-  );
+ const redirectUrl =
+  `http://localhost:5173/login-success?token=${token}&id=${req.user._id}&name=${encodeURIComponent(req.user.name)}&email=${encodeURIComponent(req.user.email)}`;
 
+console.log("Redirect URL:", redirectUrl);
+
+res.redirect(redirectUrl);
 };
