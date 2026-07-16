@@ -11,6 +11,7 @@ const {
   searchStays,
   getMyStays,
 } = require("../controllers/staysController");
+const { authorize } = require("../middleware/roleMiddleware");
 
 router.get("/", getAllStays);
 
@@ -21,11 +22,26 @@ router.get("/my", protect, getMyStays);
 router.get("/:id", getStayById);
 
 // Protected Routes
-router.post("/", protect, createStay);
+router.post(
+  "/",
+  protect,
+  authorize("host", "admin"),
+  createStay
+);
 
-router.put("/:id", protect, updateStay);
+router.put(
+  "/:id",
+  protect,
+  authorize("host", "admin"),
+  updateStay
+);
 
-router.delete("/:id", protect, deleteStay);
+router.delete(
+  "/:id",
+  protect,
+  authorize("host", "admin"),
+  deleteStay
+);
 
 
 module.exports = router;

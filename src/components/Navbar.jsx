@@ -69,12 +69,14 @@ function Navbar() {
 
         <div className="hidden md:flex gap-3">
 
+  {user?.role !== "traveler" && (
   <NavLink
     to="/add-stay"
     className="bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg transition"
   >
     + Add Stay
   </NavLink>
+  )}
 
   {token ? (
 

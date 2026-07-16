@@ -101,15 +101,15 @@ if (!errors.isEmpty()) {
     }
 
     const token = jwt.sign(
-      {
-        id: user._id,
-      },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "7d",
-      }
-    );
-
+  {
+    id: user._id,
+    role: user.role,
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "7d",
+  }
+);
     res.status(200).json({
       success: true,
       token,
@@ -117,6 +117,7 @@ if (!errors.isEmpty()) {
         id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     });
 
@@ -137,6 +138,7 @@ exports.loginWithGoogle = async (req, res) => {
   const token = jwt.sign(
     {
       id: req.user._id,
+      role: req.user.role,
     },
     process.env.JWT_SECRET,
     {
@@ -144,10 +146,10 @@ exports.loginWithGoogle = async (req, res) => {
     }
   );
 
- const redirectUrl =
-  `http://localhost:5173/login-success?token=${token}&id=${req.user._id}&name=${encodeURIComponent(req.user.name)}&email=${encodeURIComponent(req.user.email)}`;
+  const redirectUrl =
+    `http://localhost:5173/login-success?token=${token}&id=${req.user._id}&name=${encodeURIComponent(req.user.name)}&email=${encodeURIComponent(req.user.email)}&role=${req.user.role}`;
 
-console.log("Redirect URL:", redirectUrl);
+  console.log("Redirect URL:", redirectUrl);
 
-res.redirect(redirectUrl);
+  res.redirect(redirectUrl);
 };

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -12,11 +12,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import LoginSuccess from "./pages/LoginSuccess";
 import StayDetails from "./pages/StayDetails";
+import AIPlanner from "./pages/AIPlanner";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/planner" element={<AIPlanner />} />
       <Route path="/about" element={<About />} />
       <Route
   path="/dashboard"
@@ -35,11 +37,16 @@ function App() {
   element={<StayDetails />}
 />
       <Route path="/stays" element={<Stays />} />
-      <Route
+  <Route
   path="/add-stay"
   element={
     <ProtectedRoute>
-      <AddStay />
+      {JSON.parse(localStorage.getItem("user"))?.role === "host" ||
+      JSON.parse(localStorage.getItem("user"))?.role === "admin" ? (
+        <AddStay />
+      ) : (
+        <Navigate to="/" replace />
+      )}
     </ProtectedRoute>
   }
 />

@@ -16,10 +16,11 @@ function LoginSuccess() {
     const id = searchParams.get("id");
     const name = searchParams.get("name");
     const email = searchParams.get("email");
+    const role = params.get("role");
 
     if (token) {
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify({ id, name, email }));
+      localStorage.setItem("user", JSON.stringify({ id, name, email,role }));
       navigate("/dashboard", { replace: true });
     } else {
       navigate("/login", { replace: true });

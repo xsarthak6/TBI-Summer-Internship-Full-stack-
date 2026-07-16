@@ -9,6 +9,7 @@ console.log(process.env.MONGO_URI);
 const rateLimit = require("express-rate-limit");
 
 const connectDB = require("./config/db");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 const dns = require("dns");
@@ -44,6 +45,7 @@ const authRoutes = require("./routes/authRoutes");
 
 app.use("/api/stays", stayRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
 app.get("/", (req, res) => {
   res.json({
     message: "EcoStay API Running",
