@@ -1,7 +1,7 @@
 import heroImage from "../assets/hero-image.png";
 function Hero() {
   return (
-   <section className="relative min-h-[120vh] md:min-h-[125vh] flex items-center pt-20">
+  <section className="relative min-h-screen flex items-center py-24 md:py-28 overflow-hidden">
       <img
         src={heroImage}
         alt="Luxury Mountain Lodge"
@@ -37,7 +37,7 @@ function Hero() {
             Plan With AI
           </button>
         </div>
-       <div className="grid grid-cols-2 md:flex gap-6 md:gap-12 mt-12 pb-40 md:pb-24">
+       <div className="grid grid-cols-2 lg:flex gap-6 lg:gap-12 mt-10 pb-8 lg:pb-20 gap-6 md:gap-12 mt-12 pb-8 md:pb-20">
 
         <div>
           <h3 className="text-3xl font-bold">12K+</h3>
