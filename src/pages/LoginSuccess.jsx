@@ -16,7 +16,7 @@ function LoginSuccess() {
     const id = searchParams.get("id");
     const name = searchParams.get("name");
     const email = searchParams.get("email");
-    const role = params.get("role");
+    const role = searchParams.get("role");
 
     if (token) {
       localStorage.setItem("token", token);
