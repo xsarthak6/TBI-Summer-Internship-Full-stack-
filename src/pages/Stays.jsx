@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
-
+console.log("API URL:", import.meta.env.VITE_API_URL);
 
 function Stays() {
   const token = localStorage.getItem("token");
@@ -10,7 +10,7 @@ function Stays() {
 
   const fetchStays = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/stays");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/stays`);
       const data = await response.json();
 
       setStays(data);
@@ -29,7 +29,7 @@ function Stays() {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/stays/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/stays/${id}`,
       {
         method: "DELETE",
         headers: {
