@@ -1,7 +1,11 @@
 import heroImage from "../assets/hero-image.png";
+import { useNavigate } from "react-router-dom";
+
 function Hero() {
+  const navigate = useNavigate();
+
   return (
-  <section className="relative min-h-screen flex items-center py-24 md:py-28 overflow-hidden">
+    <section className="relative min-h-screen flex items-center py-24 md:py-28 overflow-hidden">
       <img
         src={heroImage}
         alt="Luxury Mountain Lodge"
@@ -10,7 +14,7 @@ function Hero() {
 
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/35"></div>
 
-    <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-16 text-white">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-16 text-white">
         <span className="inline-block ml-6 px-4 py-2 rounded-full border border-yellow-500 text-yellow-400 mb-6">
           Sustainable Travel Platform
         </span>
@@ -18,9 +22,7 @@ function Hero() {
         <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold leading-tight max-w-xl md:max-w-3xl">
           Explore Responsibly.
           <br />
-          <span className="text-green-400">
-            Stay Sustainably.
-          </span>
+          <span className="text-green-400">Stay Sustainably.</span>
         </h1>
 
         <p className="mt-8 max-w-lg text-lg md:text-xl text-gray-200 leading-relaxed">
@@ -29,11 +31,17 @@ function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <button className="bg-green-700 px-6 py-3 rounded-lg">
+          <button
+            onClick={() => navigate("/stays")}
+            className="bg-green-700 hover:bg-green-800 transition px-6 py-3 rounded-lg"
+          >
             Explore Stays
           </button>
 
-          <button className="border border-white px-6 py-3 rounded-lg">
+          <button
+            onClick={() => navigate("/planner")}
+            className="border border-white hover:bg-white hover:text-black transition px-6 py-3 rounded-lg"
+          >
             Plan With AI
           </button>
         </div>

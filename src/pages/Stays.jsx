@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 console.log("API URL:", import.meta.env.VITE_API_URL);
@@ -7,6 +8,9 @@ function Stays() {
   const token = localStorage.getItem("token");
   const [stays, setStays] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+
+const destination = searchParams.get("destination") || "";
 
   const fetchStays = async () => {
     try {
@@ -56,6 +60,10 @@ function Stays() {
   useEffect(() => {
     fetchStays();
   }, []);
+  const filteredStays = stays.filter((stay) =>
+  stay.location.toLowerCase().includes(destination.toLowerCase()) ||
+  stay.title.toLowerCase().includes(destination.toLowerCase())
+);
 
   return (
     <>
@@ -77,14 +85,14 @@ function Stays() {
             <h2 className="text-2xl font-semibold">
               Loading...
             </h2>
-          ) : stays.length === 0 ? (
+          ) : filteredStays.length === 0 ? (
             <h2 className="text-2xl font-semibold">
               No stays found.
             </h2>
           ) : (
             <div className="grid md:grid-cols-3 gap-8">
 
-              {stays.map((stay) => (
+              {filteredStays.map((stay) => (
 
                 <Card
                 key={stay._id}
