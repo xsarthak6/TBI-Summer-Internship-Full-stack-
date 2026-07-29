@@ -11,19 +11,31 @@ import Experiences from "../components/Experiences";
 function Home() {
   const [stays, setStays] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/stays")
-      .then((response) => {
+useEffect(() => {
+  console.log("ENV:", import.meta.env);
+  console.log("API URL:", import.meta.env.VITE_API_URL);
+
+  axios.get(`${import.meta.env.VITE_API_URL}/api/stays`)
+    .then((response) => {
+      console.log(response.data);
+      // Guard: only set stays if the API actually returned an array.
+      // If the backend errors out it returns an object like
+      // { message: "..." } instead of a list, which would break .map().
+      if (Array.isArray(response.data)) {
         setStays(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+      } else {
+        console.error("Unexpected /api/stays response shape:", response.data);
+        setStays([]);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      setStays([]);
+    });
+}, []);
   const handleDelete = async (id) => {
   try {
-    await axios.delete(`http://localhost:5000/api/stays/${id}`);
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/stays/${id}`);
 
     setStays((prev) => prev.filter((stay) => stay._id !== id));
 
@@ -60,7 +72,7 @@ function Home() {
           </p>
 
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-10">
-            {stays.map((stay) => (
+            {(Array.isArray(stays) ? stays : []).map((stay) => (
           <Card
             key={stay._id}
             _id={stay._id}

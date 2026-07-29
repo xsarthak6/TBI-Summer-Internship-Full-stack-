@@ -35,7 +35,7 @@ function AIPlanner() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/ai/planner",
+        `${import.meta.env.VITE_API_URL}/api/ai/planner`,
         {
           method: "POST",
           headers: {
@@ -104,6 +104,20 @@ if (data.success) {
 
 </div>
           )}
+{!loading && !plan && (
+  <div className="mt-10 bg-white rounded-3xl shadow-xl p-10 text-center">
+    <div className="text-6xl mb-4">🌿</div>
+
+    <h2 className="text-2xl font-bold text-gray-800">
+      No Eco Trip Generated Yet
+    </h2>
+
+    <p className="mt-3 text-gray-500">
+      Fill in your destination, budget, days, and interests, then click
+      <span className="font-semibold"> Generate Eco Trip</span> to receive a personalized AI itinerary.
+    </p>
+  </div>
+)}
 
           {plan && (
   <>

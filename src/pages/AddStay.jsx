@@ -27,7 +27,7 @@ function AddStay() {
     
 
     await axios.post(
-      "http://localhost:5000/api/stays",
+      `${import.meta.env.VITE_API_URL}/api/stays`,
       stay,
       {
         headers: {

@@ -15,7 +15,7 @@ function EditStay() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/stays/${id}`)
+      .get(`${import.meta.env.VITE_API_URL}/api/stays/${id}`)
       .then((res) => setStay(res.data))
       .catch((err) => console.log(err));
   }, [id]);
@@ -28,21 +28,30 @@ function EditStay() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      await axios.put(
-        `http://localhost:5000/api/stays/${id}`,
-        stay
-      );
+  const token = localStorage.getItem("token");
 
-      alert("Stay Updated Successfully!");
+  try {
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/api/stays/${id}`,
+      stay,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    alert("Stay Updated Successfully!");
+    navigate("/");
+  } catch (error) {
+    console.log(error);
+    alert(
+      error.response?.data?.message || "Failed to update stay."
+    );
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#F8F5EE] flex justify-center items-center py-20">
