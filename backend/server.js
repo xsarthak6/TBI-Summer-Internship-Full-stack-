@@ -12,6 +12,7 @@ const connectDB = require("./config/db");
 const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
+app.set("trust proxy", 1);
 const dns = require("dns");
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 

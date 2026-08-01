@@ -187,6 +187,43 @@ PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/ecostay?retryWrites=true&w=majority
 
 Do not commit your real MongoDB password or connection string to GitHub.
+# Deployment
+
+## Live Frontend URL
+https://tbi-summer-internship-full-stack.vercel.app
+
+## Live Backend URL
+https://tbi-summer-internship-full-stack.onrender.com
+
+## Tech Stack Summary
+
+### Frontend
+- React.js
+- Vite
+- React Router DOM
+- Tailwind CSS
+- Axios
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- Passport.js (Google OAuth)
+- Express Validator
+
+### Deployment
+- Frontend: Vercel
+- Backend: Render
+- Database: MongoDB Atlas
+
+## Known Limitations (Free Tier)
+
+- The backend is hosted on Render's free tier.
+- If the backend is inactive for approximately 15 minutes, Render automatically puts the service to sleep.
+- The first request after inactivity may take around 30–60 seconds while the backend wakes up.
+- After waking up, subsequent requests respond normally.
 
 
 ## Future Enhancements
