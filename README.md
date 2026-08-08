@@ -13,6 +13,23 @@ EcoStay is an AI-assisted sustainable travel platform that helps users discover 
 * AI Travel Assistant
 * Mobile-Friendly Design
 
+
+## 📸 Screenshots
+
+
+### Home Page
+
+![Home](screenshot/home.png)
+
+### Stays Page
+
+![Stays](screenshot/stays.png)
+
+### AI Planner
+
+![AI](screenshot/ai-planner1.png)
+![AI](screenshot/ai-planner2.png)
+
 ## Component Library
 
 The project includes reusable UI components:
@@ -51,7 +68,6 @@ src/components/ui/index.js
 
 * Git
 * GitHub
-* Figma
 
 ## Project Structure
 
@@ -186,7 +202,6 @@ Also ensure your .env.example file contains only placeholder values, for example
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/ecostay?retryWrites=true&w=majority
 
-Do not commit your real MongoDB password or connection string to GitHub.
 # Deployment
 
 ## Live Frontend URL
@@ -228,8 +243,6 @@ https://tbi-summer-internship-full-stack.onrender.com
 
 ## Future Enhancements
 
-* User Authentication
-* Booking System
 * AI Travel Recommendations
 * Wishlist Functionality
 * Payment Integration
